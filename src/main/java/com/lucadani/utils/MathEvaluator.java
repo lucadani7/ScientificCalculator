@@ -94,8 +94,15 @@ public class MathEvaluator {
             x = parseExpression();
             eat(')');
         } else if ((ch >= '0' && ch <= '9') || ch == '.') {
-            while ((ch >= '0' && ch <= '9') || ch == '.') {
-                nextChar();
+            while ((ch >= '0' && ch <= '9') || ch == '.' || ch == 'E') {
+                if (ch != 'E') {
+                    nextChar();
+                } else {
+                    nextChar();
+                    if (ch == '-' || ch == '+') {
+                        nextChar();
+                    }
+                }
             }
             x = Double.parseDouble(expression.substring(startPos, pos));
         } else if (ch >= 'a' && ch <= 'z') {
